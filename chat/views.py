@@ -63,7 +63,7 @@ def send(request):
     message = request.POST['message']
     username = request.POST['username']
     room_id = request.POST['room_id']
-
+    publish(message)
     new_message = Message.objects.create(value=message, user=username, room=room_id)
     new_message.save()
     return HttpResponse('Message sent successfully')
@@ -73,6 +73,6 @@ def getMessages(request, room):
 
     messages = Message.objects.filter(room=room_details.id)
     return JsonResponse({"messages":list(messages.values())})
-def publishMessage(request):
-    publish()
-    return HttpResponse('Message sent successfully')
+#def publishMessage(request):
+    #publish()
+    #return HttpResponse('Message sent successfully')
